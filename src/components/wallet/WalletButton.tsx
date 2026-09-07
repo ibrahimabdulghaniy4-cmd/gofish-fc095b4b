@@ -75,7 +75,7 @@ function BalanceRow({
   value: string;
   logo: string;
   onClick?: () => void;
-  subtitle?: string;
+  subtitle?: string | undefined;
 }) {
   const Comp = onClick ? "button" : "div";
   return (
