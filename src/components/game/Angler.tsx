@@ -1010,14 +1010,8 @@ export function Angler() {
     }
   });
 
-  const skin = "#f2c48a";
-  const shirt = "#171a1f";
-  const pants = "#20242c";
-  const vest = "#0d0f13";
-  const sleeve = "#8d949c";
-  const cuff = "#14171b";
-  const shoe = "#f4f5f2";
-  const hair = "#d9dde2";
+  const charLook = characterLook(activeCharacterId);
+
 
   return (
     <group>
