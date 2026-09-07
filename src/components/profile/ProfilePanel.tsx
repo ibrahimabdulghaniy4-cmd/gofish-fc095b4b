@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { Fish, Loader2, Upload } from "lucide-react";
+import { Fish, Loader2, Shirt, Upload } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +9,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useCharacterStore } from "@/hooks/useCharacterStore";
+import { characterLook } from "@/lib/characterLooks";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
@@ -42,7 +44,9 @@ function fileToBase64(file: File) {
 }
 
 export function ProfilePanel() {
-  const { panelOpen, setPanelOpen, profile, setProfile, proof } = useProfileStore();
+  const { panelOpen, setPanelOpen, profile, setProfile, proof, address } = useProfileStore();
+  const characterId =
+    useCharacterStore((s) => s.byAddress[(address ?? "guest").toLowerCase()]) ?? undefined;
   const [username, setUsername] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [avatarPath, setAvatarPath] = useState<string | null>(null);
@@ -179,6 +183,18 @@ export function ProfilePanel() {
               Upload photo
             </Button>
             <p className="text-xs text-muted-foreground">PNG, JPG, WEBP or GIF up to 5 MB.</p>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setPanelOpen(false);
+                useCharacterStore.getState().setSelectOpen(true);
+              }}
+            >
+              <Shirt className="mr-2 h-4 w-4" />
+              Character: {characterLook(characterId).name}
+            </Button>
           </div>
         </div>
 
