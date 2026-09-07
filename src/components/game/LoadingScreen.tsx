@@ -36,7 +36,7 @@ export function LoadingScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col bg-slate-950 transition-opacity duration-700 ${
+      className={`fixed inset-0 z-50 flex flex-col bg-slate-950 transition-opacity duration-1000 ${
         done ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
       role="status"
