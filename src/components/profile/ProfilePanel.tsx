@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { Fish, Loader2, Upload } from "lucide-react";
+import { Fish, Loader2, Shirt, Upload } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -44,7 +44,9 @@ function fileToBase64(file: File) {
 }
 
 export function ProfilePanel() {
-  const { panelOpen, setPanelOpen, profile, setProfile, proof } = useProfileStore();
+  const { panelOpen, setPanelOpen, profile, setProfile, proof, address } = useProfileStore();
+  const characterId =
+    useCharacterStore((s) => s.byAddress[(address ?? "guest").toLowerCase()]) ?? undefined;
   const [username, setUsername] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [avatarPath, setAvatarPath] = useState<string | null>(null);
