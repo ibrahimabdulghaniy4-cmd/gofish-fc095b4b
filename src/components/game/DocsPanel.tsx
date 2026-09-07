@@ -59,7 +59,7 @@ export function DocsPanel() {
           variant="outline"
           aria-label="Open game documentation"
           title="Game documentation"
-          className="rounded-full border-white/25 bg-slate-900/70 text-slate-50 shadow backdrop-blur hover:bg-slate-800/80 hover:text-slate-50"
+          className="pointer-events-auto relative z-50 rounded-full border-white/25 bg-slate-900/70 text-slate-50 shadow backdrop-blur hover:bg-slate-800/80 hover:text-slate-50"
         >
           <BookOpen aria-hidden />
         </Button>
