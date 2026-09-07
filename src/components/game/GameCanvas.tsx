@@ -34,6 +34,7 @@ import { QuestPanel } from "../quest/QuestPanel";
 import { QuestTracker } from "../quest/QuestTracker";
 import { GraphicsButton } from "./GraphicsButton";
 import { DocsPanel } from "./DocsPanel";
+import { CharacterSelect } from "./CharacterSelect";
 
 import { Npcs } from "./Npcs";
 import { NpcDialog } from "./NpcDialog";
@@ -190,6 +191,7 @@ export function GameCanvas() {
 
       </div>
       <ProfilePanel />
+      <CharacterSelect />
       <GoldPanel />
       <QuestPanel />
       <NpcDialog />
