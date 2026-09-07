@@ -1043,54 +1043,8 @@ export function Angler() {
               </mesh>
             </group>
           ))}
-          {/* torso: dark shirt */}
-          <mesh position={[0, 2.7, 0]} castShadow>
-            <boxGeometry args={[2, 1.8, 1]} />
-            <meshStandardMaterial color={shirt} roughness={0.8} />
-          </mesh>
-          {/* vest panels */}
-          {[-0.62, 0.62].map((x) => (
-            <mesh key={x} position={[x, 2.66, 0.03]} castShadow>
-              <boxGeometry args={[0.78, 1.9, 1.02]} />
-              <meshStandardMaterial color={vest} roughness={0.65} />
-            </mesh>
-          ))}
-          <mesh position={[0, 2.0, 0.03]} castShadow>
-            <boxGeometry args={[2.02, 0.62, 1.03]} />
-            <meshStandardMaterial color={vest} roughness={0.65} />
-          </mesh>
-          <mesh position={[0, 3.5, 0.03]} castShadow>
-            <boxGeometry args={[2.02, 0.3, 1.03]} />
-            <meshStandardMaterial color={vest} roughness={0.65} />
-          </mesh>
-          {/* tie */}
-          <mesh position={[0, 3.15, 0.53]} castShadow>
-            <boxGeometry args={[0.26, 0.32, 0.06]} />
-            <meshStandardMaterial color="#0b0d10" roughness={0.5} />
-          </mesh>
-          <mesh position={[0, 2.66, 0.53]} castShadow>
-            <boxGeometry args={[0.22, 0.75, 0.06]} />
-            <meshStandardMaterial color="#0b0d10" roughness={0.5} />
-          </mesh>
-          {/* vest buttons */}
-          {[2.55, 2.25, 1.95].map((y) => (
-            <mesh key={y} position={[0.16, y, 0.56]}>
-              <boxGeometry args={[0.1, 0.1, 0.04]} />
-              <meshStandardMaterial color="#e6e8ea" roughness={0.4} />
-            </mesh>
-          ))}
-          {/* white pocket square */}
-          <mesh position={[0.66, 2.62, 0.54]} rotation={[0, 0, 0.2]}>
-            <boxGeometry args={[0.34, 0.16, 0.04]} />
-            <meshStandardMaterial color="#f6f7f4" roughness={0.5} />
-          </mesh>
-          {/* shoulder epaulettes */}
-          {[-0.86, 0.86].map((x) => (
-            <mesh key={x} position={[x, 3.52, 0]} castShadow>
-              <boxGeometry args={[0.5, 0.16, 1.02]} />
-              <meshStandardMaterial color="#e8eaed" roughness={0.5} />
-            </mesh>
-          ))}
+          <CharacterTorso look={charLook} />
+
 
           {/* anchor punggung: joran menyilang di belakang badan saat dilepas */}
           <group ref={backAnchor} position={[-0.62, 1.85, -0.66]} rotation={[-0.2, 0, -0.5]} />
