@@ -59,7 +59,7 @@ export function GraphicsButton() {
       </button>
 
       {open ? (
-        <div className="absolute bottom-full right-0 mb-2 max-h-[calc(100dvh-6rem)] w-52 overflow-y-auto overscroll-contain rounded-xl border border-white/20 bg-slate-900/90 p-1 text-xs text-slate-50 shadow-lg backdrop-blur">
+        <div className="absolute top-full right-0 mt-2 max-h-[calc(100dvh-7rem)] w-52 overflow-y-auto overscroll-contain rounded-xl border border-white/20 bg-slate-900/90 p-1 text-xs text-slate-50 shadow-lg backdrop-blur">
           <p className="px-2 py-1 text-[10px] uppercase tracking-wide text-slate-400">
             Graphics quality
           </p>
