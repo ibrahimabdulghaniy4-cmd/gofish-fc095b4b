@@ -1,6 +1,9 @@
 import { useProgress } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import banner from "@/assets/loading-banner.jpg";
+
+/** Minimum time the loading artwork stays on screen, even when assets are quick. */
+const MIN_VISIBLE_MS = 3200;
 
 /**
  * Full-screen loading overlay shown while the ~27 MB of GLB models download
@@ -10,11 +13,14 @@ export function LoadingScreen() {
   const { progress, active } = useProgress();
   const [hidden, setHidden] = useState(false);
   const [done, setDone] = useState(false);
+  const mountedAt = useRef(Date.now());
 
   useEffect(() => {
     if (!active && progress >= 100) {
-      const a = window.setTimeout(() => setDone(true), 350);
-      const b = window.setTimeout(() => setHidden(true), 1100);
+      const elapsed = Date.now() - mountedAt.current;
+      const wait = Math.max(0, MIN_VISIBLE_MS - elapsed);
+      const a = window.setTimeout(() => setDone(true), wait + 600);
+      const b = window.setTimeout(() => setHidden(true), wait + 1900);
       return () => {
         window.clearTimeout(a);
         window.clearTimeout(b);
@@ -23,13 +29,14 @@ export function LoadingScreen() {
     return undefined;
   }, [active, progress]);
 
+
   if (hidden) return null;
 
   const pct = Math.min(100, Math.round(progress));
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col bg-slate-950 transition-opacity duration-700 ${
+      className={`fixed inset-0 z-50 flex flex-col bg-slate-950 transition-opacity duration-1000 ${
         done ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
       role="status"

@@ -12,10 +12,9 @@ import { useGoldStore } from "@/hooks/useGoldStore";
 import { supabase } from "@/integrations/supabase/client";
 import goldLogo from "@/assets/logo-gold.png";
 import coinsLogo from "@/assets/logo-coins.png";
-import fishLogoAsset from "@/assets/logo-fish.png.asset.json";
+import fishLogo from "@/assets/logo-fish.png";
 import { xpProgressFor } from "@/lib/xp";
 
-const fishLogo = fishLogoAsset.url;
 
 /** Round profile avatar: uploaded photo when available, initials otherwise, with a level badge. */
 function ProfileAvatar({ size = "h-9 w-9" }: { size?: string }) {
