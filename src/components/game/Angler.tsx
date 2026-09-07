@@ -19,6 +19,14 @@ import { useHotbarFishStore } from "@/hooks/useHotbarFishStore";
 import { RarityFishMesh } from "./Fish";
 
 import { rodLook } from "@/lib/rodLooks";
+import { characterLook } from "@/lib/characterLooks";
+import { useActiveCharacterId } from "@/hooks/useCharacterStore";
+import {
+  CharacterArm,
+  CharacterHead,
+  CharacterLegs,
+  CharacterTorso,
+} from "./AnglerBody";
 import { clampToWalkable, isInWater, player, resolvePlayerGround } from "@/hooks/usePlayer";
 import { boat, boatDeckWorld, moveOnDeck } from "@/hooks/useBoat";
 import { useWeather } from "@/hooks/useWeather";
@@ -76,6 +84,7 @@ export function Angler() {
   const head = useRef<THREE.Group>(null);
   const rod = useRef<THREE.Group>(null);
   const look = rodLook(useRodStore((s) => s.equippedId));
+  const activeCharacterId = useActiveCharacterId(useProfileStore((s) => s.address));
   const heldFishId = useHotbarFishStore((s) => s.heldId);
   const hotbarFishSlots = useHotbarFishStore((s) => s.slots);
   const heldFishItem = heldFishId
