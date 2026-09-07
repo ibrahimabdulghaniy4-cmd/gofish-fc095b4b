@@ -1114,55 +1114,8 @@ export function Angler() {
           </group>
           {/* head */}
           <group ref={head} position={[0, 4.25, 0]}>
-            <mesh castShadow>
-              <boxGeometry args={[1.25, 1.25, 1.25]} />
-              <meshStandardMaterial color={skin} roughness={0.75} />
-            </mesh>
-            {[-0.3, 0.3].map((x) => (
-              <mesh key={x} position={[x, 0.12, 0.64]}>
-                <boxGeometry args={[0.18, 0.24, 0.04]} />
-                <meshStandardMaterial color="#1a1d22" />
-              </mesh>
-            ))}
-            <mesh position={[0, -0.22, 0.64]}>
-              <boxGeometry args={[0.5, 0.1, 0.04]} />
-              <meshStandardMaterial color="#1a1d22" />
-            </mesh>
-            {/* silver spiky hair */}
-            <mesh position={[0, 0.66, 0]} castShadow>
-              <boxGeometry args={[1.34, 0.42, 1.34]} />
-              <meshStandardMaterial color={hair} roughness={0.6} />
-            </mesh>
-            <mesh position={[0, 0.2, -0.68]} castShadow>
-              <boxGeometry args={[1.34, 1.1, 0.14]} />
-              <meshStandardMaterial color={hair} roughness={0.6} />
-            </mesh>
-            {[-0.42, -0.14, 0.14, 0.42].map((x, i) => (
-              <mesh
-                key={x}
-                position={[x, 0.92 + (i % 2) * 0.1, 0.12 - (i % 2) * 0.2]}
-                rotation={[0.2, 0, x * 0.4]}
-                castShadow
-              >
-                <boxGeometry args={[0.24, 0.36, 0.3]} />
-                <meshStandardMaterial color={hair} roughness={0.6} />
-              </mesh>
-            ))}
-            <mesh position={[0, 0.5, 0.6]} rotation={[0.18, 0, 0]} castShadow>
-              <boxGeometry args={[1.3, 0.34, 0.28]} />
-              <meshStandardMaterial color={hair} roughness={0.6} />
-            </mesh>
-            {/* headphones */}
-            {[-0.74, 0.74].map((x) => (
-              <mesh key={x} position={[x, 0.05, 0]} castShadow>
-                <boxGeometry args={[0.22, 0.62, 0.62]} />
-                <meshStandardMaterial color="#e8eaed" roughness={0.5} />
-              </mesh>
-            ))}
-            <mesh position={[0, 0.74, 0]} castShadow>
-              <torusGeometry args={[0.74, 0.07, 8, 16, Math.PI]} />
-              <meshStandardMaterial color="#e8eaed" roughness={0.5} />
-            </mesh>
+            <CharacterHead look={charLook} />
+
           </group>
 
           {/* left arm (character's left = +X side) */}
