@@ -1167,18 +1167,8 @@ export function Angler() {
 
           {/* left arm (character's left = +X side) */}
           <group ref={leftArm} position={[1.5, 3.5, 0]}>
-            <mesh position={[0, -0.5, 0]} castShadow>
-              <boxGeometry args={[0.92, 1.1, 0.92]} />
-              <meshStandardMaterial color={sleeve} roughness={0.7} />
-            </mesh>
-            <mesh position={[0, -1.16, 0]} castShadow>
-              <boxGeometry args={[0.96, 0.34, 0.96]} />
-              <meshStandardMaterial color={cuff} roughness={0.6} />
-            </mesh>
-            <mesh position={[0, -1.58, 0]} castShadow>
-              <boxGeometry args={[0.9, 0.55, 0.9]} />
-              <meshStandardMaterial color={skin} roughness={0.75} />
-            </mesh>
+            <CharacterArm look={charLook} />
+
           </group>
 
           {/* right arm + rod (character's right = -X side) */}
