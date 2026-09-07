@@ -69,11 +69,13 @@ function BalanceRow({
   value,
   logo,
   onClick,
+  subtitle,
 }: {
   symbol: string;
   value: string;
   logo: string;
   onClick?: () => void;
+  subtitle?: string;
 }) {
   const Comp = onClick ? "button" : "div";
   return (
@@ -88,7 +90,12 @@ function BalanceRow({
         <img src={logo} alt={`${symbol} logo`} className="h-5 w-5 rounded-full object-cover" />
         {symbol}
       </span>
-      <span className="font-semibold tabular-nums text-slate-50">{value}</span>
+      <span className="text-right">
+        <span className="block font-semibold tabular-nums text-slate-50">{value}</span>
+        {subtitle && (
+          <span className="block text-[9px] tabular-nums text-slate-400">{subtitle}</span>
+        )}
+      </span>
     </Comp>
   );
 }
