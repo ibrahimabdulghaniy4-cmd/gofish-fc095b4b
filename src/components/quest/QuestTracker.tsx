@@ -133,7 +133,10 @@ export function QuestTracker() {
           )}
         </>
       ) : (
-        <p className="mt-1.5 text-xs font-semibold text-white">No quest data available right now.</p>
+        <p className="mt-1.5 text-xs font-semibold text-white">
+          Your quests start after your angler profile is saved. Catch a fish or reconnect your
+          wallet to begin.
+        </p>
       )}
     </div>
   );
