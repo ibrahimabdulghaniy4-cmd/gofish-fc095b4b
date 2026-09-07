@@ -123,6 +123,15 @@ export function WalletButton() {
     query: { enabled: isConnected && chainId === robinhoodChain.id },
   });
 
+  const fetchEthPrice = useServerFn(getEthPrice);
+  const { data: ethPrice } = useQuery({
+    queryKey: ["eth-price-usd"],
+    queryFn: fetchEthPrice,
+    enabled: isConnected,
+    refetchInterval: 60_000,
+    staleTime: 30_000,
+  });
+
   const wrongNetwork = isConnected && chainId !== robinhoodChain.id;
   const connector = connectors.find((c) => c.id === "injected") ?? connectors[0];
 
