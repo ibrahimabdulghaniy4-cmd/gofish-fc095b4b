@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { useAccount, useBalance, useConnect, useDisconnect, useSwitchChain } from "wagmi";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Wallet } from "lucide-react";
 import { formatUnits } from "viem";
 import { robinhoodChain } from "@/lib/chains";
+import { getEthPrice } from "@/lib/price.functions";
 import { useProfileStore } from "@/hooks/useProfileStore";
 import { useWalletProfile } from "@/hooks/useWalletProfile";
 import { useGoldStore } from "@/hooks/useGoldStore";
 import { supabase } from "@/integrations/supabase/client";
 import goldLogo from "@/assets/logo-gold.png";
 import coinsLogo from "@/assets/logo-coins.png";
+import fishLogoAsset from "@/assets/logo-fish.png.asset.json";
 import { xpProgressFor } from "@/lib/xp";
+
+const fishLogo = fishLogoAsset.url;
 
 /** Round profile avatar: uploaded photo when available, initials otherwise, with a level badge. */
 function ProfileAvatar({ size = "h-9 w-9" }: { size?: string }) {
@@ -63,11 +69,13 @@ function BalanceRow({
   value,
   logo,
   onClick,
+  subtitle,
 }: {
   symbol: string;
   value: string;
   logo: string;
   onClick?: () => void;
+  subtitle?: string | undefined;
 }) {
   const Comp = onClick ? "button" : "div";
   return (
@@ -82,7 +90,12 @@ function BalanceRow({
         <img src={logo} alt={`${symbol} logo`} className="h-5 w-5 rounded-full object-cover" />
         {symbol}
       </span>
-      <span className="font-semibold tabular-nums text-slate-50">{value}</span>
+      <span className="text-right">
+        <span className="block font-semibold tabular-nums text-slate-50">{value}</span>
+        {subtitle && (
+          <span className="block text-[9px] tabular-nums text-slate-400">{subtitle}</span>
+        )}
+      </span>
     </Comp>
   );
 }
@@ -108,6 +121,15 @@ export function WalletButton() {
     address,
     chainId: robinhoodChain.id,
     query: { enabled: isConnected && chainId === robinhoodChain.id },
+  });
+
+  const fetchEthPrice = useServerFn(getEthPrice);
+  const { data: ethPrice } = useQuery({
+    queryKey: ["eth-price-usd"],
+    queryFn: fetchEthPrice,
+    enabled: isConnected,
+    refetchInterval: 60_000,
+    staleTime: 30_000,
   });
 
   const wrongNetwork = isConnected && chainId !== robinhoodChain.id;
@@ -141,9 +163,16 @@ export function WalletButton() {
     );
   }
 
-  const ethValue = displayBalance(
-    ethBalance ? Number.parseFloat(formatUnits(ethBalance.value, ethBalance.decimals)).toFixed(4) : "0"
-  );
+  const ethAmount = ethBalance
+    ? Number.parseFloat(formatUnits(ethBalance.value, ethBalance.decimals))
+    : 0;
+  const ethValue = displayBalance(ethAmount.toFixed(4));
+  const ethUsd =
+    ethPrice?.usd != null && ethAmount > 0
+      ? `≈ $${(ethAmount * ethPrice.usd).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`
+      : ethPrice?.usd != null
+        ? "≈ $0.00 USD"
+        : undefined;
 
   return (
     <div className="pointer-events-auto w-44 overflow-hidden rounded-xl border border-white/20 bg-slate-900/60 shadow-lg backdrop-blur-md">
@@ -174,8 +203,8 @@ export function WalletButton() {
         </span>
       </button>
       <div className="divide-y divide-white/5">
-        <BalanceRow symbol="ETH" value={ethValue} logo="/logo-eth.png" />
-        <BalanceRow symbol="USDG" value={displayBalance("0.00")} logo="/logo-usdg.png" />
+        <BalanceRow symbol="ETH" value={ethValue} logo="/logo-eth.png" subtitle={ethUsd} />
+        <BalanceRow symbol="FISH" value={displayBalance("0")} logo={fishLogo} />
         <BalanceRow
           symbol="GOLD"
           value={displayBalance(Number(profile?.gold ?? 0).toLocaleString())}
