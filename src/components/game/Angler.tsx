@@ -1020,27 +1020,8 @@ export function Angler() {
           {/* legs (hip-pivoted for the walk cycle) */}
           {[-0.52, 0.52].map((x) => (
             <group key={x} ref={x < 0 ? legL : legR} position={[x, 1.8, 0]}>
-              <mesh position={[0, -0.72, 0]} castShadow>
-                <boxGeometry args={[0.95, 1.45, 0.95]} />
-                <meshStandardMaterial color={pants} roughness={0.9} />
-              </mesh>
-              {/* distressed patches */}
-              {[0.15, -0.35, -0.9].map((y, i) => (
-                <mesh key={y} position={[i % 2 === 0 ? 0.2 : -0.24, y - 0.35, 0.49]}>
-                  <boxGeometry args={[0.3, 0.16, 0.02]} />
-                  <meshStandardMaterial color="#8e949c" roughness={0.9} />
-                </mesh>
-              ))}
-              {/* cuff */}
-              <mesh position={[0, -1.52, 0]} castShadow>
-                <boxGeometry args={[1, 0.18, 1]} />
-                <meshStandardMaterial color="#9aa0a8" roughness={0.9} />
-              </mesh>
-              {/* white sneaker */}
-              <mesh position={[0, -1.75, 0.1]} castShadow>
-                <boxGeometry args={[1.02, 0.35, 1.15]} />
-                <meshStandardMaterial color={shoe} roughness={0.6} />
-              </mesh>
+              <CharacterLegs look={charLook} side={x < 0 ? -1 : 1} />
+
             </group>
           ))}
           <CharacterTorso look={charLook} />
