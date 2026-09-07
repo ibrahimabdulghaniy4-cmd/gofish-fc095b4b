@@ -72,7 +72,7 @@ export function QuestTracker() {
         title="Open quest details"
       >
         <Sparkles className="h-3.5 w-3.5 shrink-0 drop-shadow-md" aria-hidden />
-        {allDone ? "All quests complete!" : `Quest ${quest?.orderIndex}/10`}
+        {allDone ? "All quests complete!" : quest ? `Quest ${quest.orderIndex}/10` : "Quests"}
       </button>
 
       {allDone ? (
@@ -133,7 +133,10 @@ export function QuestTracker() {
           )}
         </>
       ) : (
-        <p className="mt-1.5 text-xs font-semibold text-white">No quest data available right now.</p>
+        <p className="mt-1.5 text-xs font-semibold text-white">
+          Your quests start after your angler profile is saved. Catch a fish or reconnect your
+          wallet to begin.
+        </p>
       )}
     </div>
   );
