@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { useAccount, useBalance, useConnect, useDisconnect, useSwitchChain } from "wagmi";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { Wallet } from "lucide-react";
 import { formatUnits } from "viem";
 import { robinhoodChain } from "@/lib/chains";
+import { getEthPrice } from "@/lib/price.functions";
 import { useProfileStore } from "@/hooks/useProfileStore";
 import { useWalletProfile } from "@/hooks/useWalletProfile";
 import { useGoldStore } from "@/hooks/useGoldStore";
 import { supabase } from "@/integrations/supabase/client";
 import goldLogo from "@/assets/logo-gold.png";
 import coinsLogo from "@/assets/logo-coins.png";
+import fishLogoAsset from "@/assets/logo-fish.png.asset.json";
 import { xpProgressFor } from "@/lib/xp";
+
+const fishLogo = fishLogoAsset.url;
 
 /** Round profile avatar: uploaded photo when available, initials otherwise, with a level badge. */
 function ProfileAvatar({ size = "h-9 w-9" }: { size?: string }) {
