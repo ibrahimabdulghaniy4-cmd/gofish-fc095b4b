@@ -72,7 +72,7 @@ export function QuestTracker() {
         title="Open quest details"
       >
         <Sparkles className="h-3.5 w-3.5 shrink-0 drop-shadow-md" aria-hidden />
-        {allDone ? "All quests complete!" : `Quest ${quest?.orderIndex}/10`}
+        {allDone ? "All quests complete!" : quest ? `Quest ${quest.orderIndex}/10` : "Quests"}
       </button>
 
       {allDone ? (
