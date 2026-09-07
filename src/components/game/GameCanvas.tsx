@@ -33,6 +33,7 @@ import { GoldPanel } from "../gold/GoldPanel";
 import { QuestPanel } from "../quest/QuestPanel";
 import { QuestTracker } from "../quest/QuestTracker";
 import { GraphicsButton } from "./GraphicsButton";
+import { DocsPanel } from "./DocsPanel";
 
 import { Npcs } from "./Npcs";
 import { NpcDialog } from "./NpcDialog";
@@ -181,7 +182,10 @@ export function GameCanvas() {
 
       <div className="pointer-events-none fixed right-4 top-4 z-40 flex flex-col items-end gap-2">
         <WalletButton />
-        <GraphicsButton />
+        <div className="flex items-center gap-2">
+          <DocsPanel />
+          <GraphicsButton />
+        </div>
         <QuestTracker />
 
       </div>
