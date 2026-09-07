@@ -163,9 +163,16 @@ export function WalletButton() {
     );
   }
 
-  const ethValue = displayBalance(
-    ethBalance ? Number.parseFloat(formatUnits(ethBalance.value, ethBalance.decimals)).toFixed(4) : "0"
-  );
+  const ethAmount = ethBalance
+    ? Number.parseFloat(formatUnits(ethBalance.value, ethBalance.decimals))
+    : 0;
+  const ethValue = displayBalance(ethAmount.toFixed(4));
+  const ethUsd =
+    ethPrice?.usd != null && ethAmount > 0
+      ? `≈ $${(ethAmount * ethPrice.usd).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`
+      : ethPrice?.usd != null
+        ? "≈ $0.00 USD"
+        : undefined;
 
   return (
     <div className="pointer-events-auto w-44 overflow-hidden rounded-xl border border-white/20 bg-slate-900/60 shadow-lg backdrop-blur-md">
